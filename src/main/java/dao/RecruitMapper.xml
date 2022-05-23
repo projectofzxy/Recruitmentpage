@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.RecruitMapper">
+    <insert id="addUser" parameterType="User">
+        insert into web_keshe.user (username, password, authority, mail, name, birthday, gender)
+         value (#{username},#{password},#{authority},#{mail},#{name},#{birthday},#{gender});
+    </insert>
+
+    <insert id="addAnnouncement" parameterType="Announcement">
+        insert into web_keshe.announcement (publisher, announcement, date)
+         value (#{publisher},#{announcement},#{date});
+    </insert>
+
+    <insert id="addApplyuser" parameterType="Applyuser">
+        insert into web_keshe.applyuser (username, resume)
+         value (#{username},#{resume})
+    </insert>
+
+    <insert id="addDeliveryInformation" parameterType="DeliveryInformation">
+        insert into web_keshe.delivery_information (companyname, hirername, resume, date)
+         VALUE (#{companyname},#{hirername},#{resume},#{date})
+    </insert>
+
+    <insert id="addRecruiter" parameterType="Recruiter">
+        insert into web_keshe.recruiter (username, password, mail, company, information)
+         VALUE (#{username},#{password},#{mail},#{company},#{information})
+    </insert>
+
+    <insert id="addRecruitmentInformation" parameterType="RecruitmentInformation">
+        insert into web_keshe.recruitment_information (hiresname, recruitment, time)
+         VALUE (#{hiresname},#{recruitment},#{time})
+    </insert>
+
+    <select id="queryAllAnnouncement" resultType="Announcement">
+        select * from web_keshe.announcement
+    </select>
+
+    <select id="queryAllRecruitmentInformation" resultType="RecruitmentInformation">
+        select * from web_keshe.recruitment_information
+    </select>
+
+    <select id="queryAllDeliveryInformation" resultType="DeliveryInformation" parameterType="String">
+        select * from web_keshe.delivery_information where companyname=#{companyname}
+    </select>
+
+    <select id="queryAllRecruiter" resultType="Recruiter">
+        select * from web_keshe.recruiter
+    </select>
+
+    <select id="queryRecruiterById" resultType="Recruiter">
+        select *from web_keshe.recruiter where id=#{id}
+    </select>
+
+    <select id="queryUser" resultType="User">
+        select * from web_keshe.user where username=#{username}
+    </select>
+
+    <select id="queryApplyuser" resultType="Applyuser">
+        select * from web_keshe.applyuser where username=#{username}
+    </select>
+
+    <select id="queryDeliveryInformationById" resultType="DeliveryInformation">
+        select * from web_keshe.delivery_information where id=#{id}
+    </select>
+
+    <delete id="deleteAnnouncement" parameterType="int">
+        delete from web_keshe.announcement
+        where id=#{id}
+    </delete>
+
+    <delete id="deleteDeliveryInformation" parameterType="int">
+        delete from web_keshe.delivery_information
+        where id=#{id}
+    </delete>
+
+    <delete id="deleteRecruiter" parameterType="int">
+        delete from web_keshe.recruiter
+        where id=#{id}
+    </delete>
+    
+    <update id="updateUser" parameterType="User">
+        update web_keshe.user
+        set mail=#{mail},name=#{name},birthday=#{birthday},gender=#{gender}
+        where username=#{username}
+    </update>
+
+    <update id="updateApplyuser" parameterType="Applyuser">
+        update web_keshe.applyuser
+        set resume=#{resume}
+        where username=#{username}
+    </update>
+
+    <update id="updateRecruitmentInformation" parameterType="RecruitmentInformation">
+        update web_keshe.recruitment_information
+        set  recruitment=#{recruitment}
+        where hiresname=#{hiresname}
+    </update>
+</mapper>
